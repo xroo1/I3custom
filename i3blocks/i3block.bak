@@ -1,0 +1,36 @@
+# i3blocks configuration inspired by i3status
+
+[wireless]
+command=ip route | grep '^default' | awk '{print $9}'
+interval=10
+label=WiFi:
+
+[battery]
+command=acpi -b | sed 's/Battery 0: //' | sed 's/,/, /g'
+interval=30
+label=BAT:
+color=#00FF00
+
+[disk]
+command=df -h / | awk 'NR==2 { print "DISK /", $4 }'
+interval=30
+label=
+
+[load]
+command=uptime | awk -F'load average:' '{ print "LOAD AV", $2 }'
+interval=10
+
+[memory]
+command=free -h | awk '/Mem:/ { print "USED", $3, "/ FREE", $7 }'
+interval=10
+
+[volume]
+command=$HOME/.config/i3/get-volume.sh
+interval=1
+label=
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
+label=
+
